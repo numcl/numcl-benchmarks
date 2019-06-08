@@ -1,8 +1,10 @@
 
 
-all: $(patsubst %.ros,%.log,$(wildcard *.ros))
+all: $(patsubst %.ros,logs/%.log,$(wildcard *.ros))
 
+logs:
+	mkdir $@
 
-%.log: %.lisp
+logs/%.log: %.lisp logs
 	ros -L sbcl $< > $@
 
