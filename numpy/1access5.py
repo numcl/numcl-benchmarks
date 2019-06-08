@@ -25,27 +25,6 @@ with Benchmarker(loop, width=20) as bench:
 
     a = zeros((100,100,100,100))
 
-    @bench('access')
-    def run_access(bm):
-        for i in bm:
-            for i in range(100):
-                a[i,i,i,i] = 1
-                
-    @bench('access1')
-    def run_access1(bm):
-        for i in bm:
-            for i in range(100):
-                a[i,i,i,:] = 1
-    @bench('access2')
-    def run_access2(bm):
-        for i in bm:
-            for i in range(100):
-                a[i,i,:,i] = 1
-    @bench('access3')
-    def run_access2(bm):
-        for i in bm:
-            for i in range(100):
-                a[i,:,i,i] = 1
     @bench('access4')
     def run_access4(bm):
         for i in bm:
