@@ -1,0 +1,19 @@
+
+
+This repository is part of NUMCL.
+
+* Dependencies
+
+numpy: =pip3 install numpy benchmarker=
+
+numcl: =ros install numcl/constantfold numcl/gtype numcl/specialized-function numcl/numcl trivial-benchmarks=
+
+* Author, License, Copyright
+
+Masataro Asai (guicho2.71828@gmail.com)
+
+Licensed under LGPL v3.
+
+Copyright (c) 2019 IBM Corporation
+
+

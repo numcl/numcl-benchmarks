@@ -1,0 +1,45 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros -Q -- $0 "$@"
+|#
+(progn ;;init forms
+  (ros:ensure-asdf)
+  #+quicklisp(ql:quickload '(:trivial-benchmark :numcl) :silent t)
+  )
+
+#|
+This file is a part of NUMCL project.
+Copyright (c) 2019 IBM Corporation
+SPDX-License-Identifier: LGPL-3.0-or-later
+
+NUMCL is free software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any
+later version.
+
+NUMCL is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+NUMCL.  If not, see <http://www.gnu.org/licenses/>.
+|#
+
+(defpackage :ros.script.benchmark
+  (:use :numcl :trivial-benchmark))
+(in-package :ros.script.benchmark)
+(declaim (sb-ext:muffle-conditions sb-ext:compiler-note style-warning))
+
+(defun main (&aux
+               (b (zeros '(100 100)))
+               (c (zeros '(100 100)))
+               (b2 (zeros '(30 30)))
+               (c2 (zeros '(30 30)))
+               (d (zeros 1000))
+               (e (zeros 1000)))
+  (with-timing (1000)
+    ))
+
+
+
