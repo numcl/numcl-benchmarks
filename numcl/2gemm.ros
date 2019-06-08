@@ -42,8 +42,3 @@ NUMCL.  If not, see <http://www.gnu.org/licenses/>.
     (einsum '(ij jk -> ik) b c))
   (with-timing (1000)
     (matmul b c)))
-
-
-
-
-

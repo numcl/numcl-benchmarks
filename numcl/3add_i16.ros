@@ -41,7 +41,3 @@ NUMCL.  If not, see <http://www.gnu.org/licenses/>.
   (with-timing (1000)
     ))
 
-
-
-
-

@@ -42,8 +42,3 @@ NUMCL.  If not, see <http://www.gnu.org/licenses/>.
     (diag b))
   (with-timing (1000)
     (einsum '(ii -> i) b)))
-
-
-
-
-

@@ -40,6 +40,3 @@ NUMCL.  If not, see <http://www.gnu.org/licenses/>.
                (e (zeros 1000)))
   (with-timing (1000)
     ))
-
-
-
