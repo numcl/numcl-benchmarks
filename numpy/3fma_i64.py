@@ -23,12 +23,6 @@ loop = 1000
 
 with Benchmarker(loop, width=20) as bench:
 
-    b     = zeros((100,100))
-    c     = zeros((100,100))
-    b2    = zeros((30,30))
-    c2    = zeros((30,30))
-    d     = zeros((1000))
-    e     = zeros((1000))
     v_s   = zeros(10000,float32)
     v_d   = zeros(10000,float64)
     v_cs  = zeros(10000,complex64)
