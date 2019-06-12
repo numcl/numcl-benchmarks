@@ -5,8 +5,11 @@ all: $(patsubst %.ros,logs/%.log,$(wildcard *.ros))
 logs:
 	mkdir $@
 
-logs/%.log: %.lisp logs
-	ros -L sbcl $< > $@
+%.bin: %.ros
+	ros -L sbcl dump executable $< -o $@
+
+logs/%.log: %.bin logs
+	exec ./$< > $@
 
 clean:
 	-rm logs/*.log
