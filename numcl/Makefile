@@ -8,3 +8,5 @@ logs:
 logs/%.log: %.lisp logs
 	ros -L sbcl $< > $@
 
+clean:
+	-rm logs/*.log

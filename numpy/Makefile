@@ -8,3 +8,5 @@ logs:
 logs/%.log: %.py logs
 	python3 $< > $@
 
+clean:
+	-rm logs/*.log
