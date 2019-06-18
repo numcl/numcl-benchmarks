@@ -33,6 +33,7 @@ NUMCL.  If not, see <http://www.gnu.org/licenses/>.
 (declaim (sb-ext:muffle-conditions sb-ext:compiler-note style-warning))
 
 (defun main (&aux
+               (a (zeros '(100 100) :type 'single-float))
                (b (zeros '(100 100) :type 'single-float))
                (c (zeros '(100 100) :type 'single-float))
                (b2 (zeros '(30 30) :type 'single-float))
@@ -40,6 +41,6 @@ NUMCL.  If not, see <http://www.gnu.org/licenses/>.
                (d (zeros 1000 :type 'single-float))
                (e (zeros 1000 :type 'single-float)))
   (with-timing (1000)
-    (einsum '(ij jk -> ik) b c))
+    (einsum '(ij jk -> ik) a b c))
   (with-timing (1000)
-    (matmul b c)))
+    (matmul a b c)))

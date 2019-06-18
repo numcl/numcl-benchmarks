@@ -23,6 +23,7 @@ loop = 1000
 
 with Benchmarker(loop, width=20) as bench:
 
+    a = zeros((100,100))
     b = zeros((100,100))
     c = zeros((100,100))
     b2 = zeros((30,30))
@@ -31,9 +32,9 @@ with Benchmarker(loop, width=20) as bench:
     @bench('einsum_gemm')
     def run_einsum_gemm(bm):
         for i in bm:
-            einsum('ij,jk->ik',b,c)
+            einsum('ij,jk->ik',a,b,out=c)
     
     @bench('builtin_gemm')
     def run_builtin_gemm(bm):
         for i in bm:
-            matmul(b,c)
+            matmul(a,b,out=c)
