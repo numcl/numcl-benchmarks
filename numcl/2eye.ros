@@ -29,6 +29,7 @@ NUMCL.  If not, see <http://www.gnu.org/licenses/>.
 (defpackage :ros.script.benchmark
   (:use :numcl :trivial-benchmark))
 (in-package :ros.script.benchmark)
+#+sbcl
 (declaim (sb-ext:muffle-conditions sb-ext:compiler-note style-warning))
 
 (defun main (&aux
