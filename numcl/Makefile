@@ -6,7 +6,7 @@ logs:
 	-mkdir $@
 
 %.bin: %.ros
-	ros -L sbcl dump executable $< -o $@
+	ros dump executable $< -o $@
 
 logs/%.log: %.bin logs
 	exec ./$< > $@
