@@ -3,7 +3,7 @@
 all: $(patsubst %.ros,logs/%.log,$(wildcard *.ros))
 
 logs:
-	mkdir $@
+	-mkdir $@
 
 %.bin: %.ros
 	ros -L sbcl dump executable $< -o $@

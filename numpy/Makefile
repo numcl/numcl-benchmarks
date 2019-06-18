@@ -3,7 +3,7 @@
 all: $(patsubst %.py,logs/%.log,$(wildcard *.py))
 
 logs:
-	mkdir $@
+	-mkdir $@
 
 logs/%.log: %.py logs
 	python3 $< > $@
