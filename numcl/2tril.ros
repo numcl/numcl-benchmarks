@@ -40,4 +40,4 @@ NUMCL.  If not, see <http://www.gnu.org/licenses/>.
                (d (zeros 1000 :type 'single-float))
                (e (zeros 1000 :type 'single-float)))
   (with-timing (1000)
-    ))
+    (tril b)))
