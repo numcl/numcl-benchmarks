@@ -40,4 +40,6 @@ NUMCL.  If not, see <http://www.gnu.org/licenses/>.
                (d (zeros 1000 :type 'single-float))
                (e (zeros 1000 :type 'single-float)))
   (with-timing (1000)
-    ))
+    (einsum '(ij kl -> ikjl) b2 c2))
+  (with-timing (1000)
+    (kron b2 c2)))
