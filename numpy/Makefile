@@ -1,12 +1,12 @@
 
 
-all: $(patsubst %.py,logs/%.log,$(wildcard *.py))
+all: $(patsubst %.py,logs/%.json,$(wildcard *.py))
 
 logs:
 	-mkdir $@
 
-logs/%.log: %.py logs
-	python3 $< > $@
+logs/%.json: %.py logs
+	python3 $< -o $@
 
 clean:
-	-rm logs/*.log
+	-rm logs/*.json
