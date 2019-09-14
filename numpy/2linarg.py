@@ -17,11 +17,17 @@
 # NUMCL.  If not, see <http://www.gnu.org/licenses/>.
 
 from numpy import *
-from benchmarker import Benchmarker
+from benchmarker import Benchmarker, Reporter
 
-loop = 100
+class Short(Reporter):
+    def __init__(self):
+        super().__init__(20)
+    def report_ranking(self, benchmarks):
+        return ''
+    def report_matrix(self, benchmarks):
+        return ''
 
-with Benchmarker(loop) as bench:
+with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
 
     a = zeros((100,100))
     b = zeros((100,100))
@@ -44,7 +50,7 @@ with Benchmarker(loop) as bench:
         for i in bm:
             diag(a)
 
-    @bench('eye/numpy')
+    @bench('eye/naive')
     def run(bm):
         for i in bm:
             a = zeros((100,100))
@@ -79,59 +85,59 @@ with Benchmarker(loop) as bench:
     @bench('inner/einsum')
     def run(bm):
         for i in bm:
-            einsum('i,i->i',d,e)
+            einsum('i,i->',d,e)
     
     @bench('inner/builtin')
     def run(bm):
         for i in bm:
             inner(d,e)
 
-    @bench('einsum_kron', tag="slow")
+    @bench('kron/einsum', tag="slow")
     def run(bm):
         for i in bm:
             einsum('ij,kl->ikjl',a,b)
     
-    @bench('builtin_kron', tag="slow")
+    @bench('kron/builtin', tag="slow")
     def run(bm):
         for i in bm:
             kron(a,b)
 
-    @bench('einsum_outer')
+    @bench('outer/einsum')
     def run(bm):
         for i in bm:
             einsum('i,j->ij',d,e)
     
-    @bench('builtin_outer')
+    @bench('outer/builtin')
     def run(bm):
         for i in bm:
             outer(d,e)
 
-    @bench('builtin_tri')
+    @bench('tri/builtin')
     def run(bm):
         for i in bm:
             tri(100)
 
-    @bench('builtin_tril')
+    @bench('tril/builtin')
     def run(bm):
         for i in bm:
             tril(b)
 
-    @bench('builtin_triu')
+    @bench('triu/builtin')
     def run(bm):
         for i in bm:
             triu(b)
 
-    @bench('builtin_vander')
+    @bench('vander/builtin')
     def run(bm):
         for i in bm:
             vander(d)
 
-    @bench('einsum_vdot')
+    @bench('vdot/einsum')
     def run(bm):
         for i in bm:
-            einsum('i,i->',d,e)
+            einsum('i,i->',conjugate(d),e)
     
-    @bench('builtin_vdot')
+    @bench('vdot/builtin')
     def run(bm):
         for i in bm:
             vdot(d,e)

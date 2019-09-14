@@ -1,0 +1,124 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros dynamic-space-size=10000 -Q -- $0 "$@"
+|#
+(progn ;;init forms
+  (ros:ensure-asdf)
+  #+quicklisp(ql:quickload '(:trivial-benchmark :numcl) :silent t)
+  )
+
+#|
+This file is a part of NUMCL project.
+Copyright (c) 2019 IBM Corporation
+SPDX-License-Identifier: LGPL-3.0-or-later
+
+NUMCL is free software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any
+later version.
+
+NUMCL is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+NUMCL.  If not, see <http://www.gnu.org/licenses/>.
+|#
+
+(defpackage :ros.script.benchmark
+  (:use :numcl :trivial-benchmark))
+(in-package :ros.script.benchmark)
+#+sbcl
+(declaim (sb-ext:muffle-conditions sb-ext:compiler-note style-warning))
+
+(load "timer.lisp")
+
+(defun main (&aux
+               (s (zeros 10000 :type 'single-float))
+               (d (zeros 10000 :type 'double-float))
+               (cs (zeros 10000 :type '(complex single-float)))
+               (cd (zeros 10000 :type '(complex double-float)))
+               (i1 (zeros 10000 :type 'bit))
+               (i8 (zeros 10000 :type '(signed-byte 8)))
+               (i16 (zeros 10000 :type '(signed-byte 16)))
+               (i32 (zeros 10000 :type '(signed-byte 32)))
+               (i64 (zeros 10000 :type '(signed-byte 64))))
+  (banner)
+  (with-timing (:name "add_i1_i1")
+    (+ i1 i1))
+  (with-timing (:name "add_i8_i8")
+    (+ i8 i8))
+  (with-timing (:name "add_i16_i16")
+    (+ i16 i16))
+  (with-timing (:name "add_i32_i32")
+    (+ i32 i32))
+  (with-timing (:name "add_i64_i64")
+    (+ i64 i64))
+  (with-timing (:name "add_s_s")
+    (+ s s))
+  (with-timing (:name "add_d_d")
+    (+ d d))
+  ;; WIP --- bug in the complex number arithmetic
+  ;; (with-timing (:name "add_cs_cs")
+  ;;   (+ cs cs))
+  ;; (with-timing (:name "add_cd_cd")
+  ;;   (+ cd cd))
+  (with-timing (:name "add_s_d")
+    (+ s d))
+  (with-timing (:name "add_s_i32")
+    (+ s i32))
+  (with-timing (:name "add_d_i32")
+    (+ d i32))
+
+  (with-timing (:name "mul_i1_i1")
+    (* i1 i1))
+  (with-timing (:name "mul_i8_i8")
+    (* i8 i8))
+  (with-timing (:name "mul_i16_i16")
+    (* i16 i16))
+  (with-timing (:name "mul_i32_i32")
+    (* i32 i32))
+  (with-timing (:name "mul_i64_i64")
+    (* i64 i64))
+  (with-timing (:name "mul_s_s")
+    (* s s))
+  (with-timing (:name "mul_d_d")
+    (* d d))
+  ;; WIP --- bug in the complex number arithmetic
+  ;; (with-timing (:name "mul_cs_cs")
+  ;;   (* cs cs))
+  ;; (with-timing (:name "mul_cd_cd")
+  ;;   (* cd cd))
+  (with-timing (:name "mul_s_d")
+    (* s d))
+  (with-timing (:name "mul_s_i32")
+    (* s i32))
+  (with-timing (:name "mul_d_i32")
+    (* d i32))
+  
+  (with-timing (:name "fma_i1_i1_i1")
+    (+ (* i1 i1) i1))
+  (with-timing (:name "fma_i8_i8_i8")
+    (+ (* i8 i8) i8))
+  (with-timing (:name "fma_i16_i16_i16")
+    (+ (* i16 i16) i16))
+  (with-timing (:name "fma_i32_i32_i32")
+    (+ (* i32 i32) i32))
+  (with-timing (:name "fma_i64_i64_i64")
+    (+ (* i64 i64) i64))
+  (with-timing (:name "fma_s_s_s")
+    (+ (* s s) s))
+  (with-timing (:name "fma_d_d_d")
+    (+ (* d d) d))
+  ;; WIP --- bug in the complex number arithmetic
+  ;; (with-timing (:name "fma_cs_cs_cs")
+  ;;   (+ (* cs cs) cs))
+  ;; (with-timing (:name "fma_cd_cd_cd")
+  ;;   (+ (* cd cd) cd))
+  (with-timing (:name "fma_d_i32_d")
+    (+ (* d i32) d))
+  (with-timing (:name "fma_s_i32_s")
+    (+ (* s i32) s))
+  (with-timing (:name "fma_d_i32_d")
+    (+ (* d i32) d)))

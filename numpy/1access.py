@@ -17,11 +17,17 @@
 # NUMCL.  If not, see <http://www.gnu.org/licenses/>.
 
 from numpy import *
-from benchmarker import Benchmarker
+from benchmarker import Benchmarker, Reporter
 
-loop = 100
+class Short(Reporter):
+    def __init__(self):
+        super().__init__(20)
+    def report_ranking(self, benchmarks):
+        return ''
+    def report_matrix(self, benchmarks):
+        return ''
 
-with Benchmarker(loop, width=20) as bench:
+with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
 
     a = zeros((100,100,100,100))
 

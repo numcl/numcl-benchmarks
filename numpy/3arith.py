@@ -17,11 +17,17 @@
 # NUMCL.  If not, see <http://www.gnu.org/licenses/>.
 
 from numpy import *
-from benchmarker import Benchmarker
+from benchmarker import Benchmarker, Reporter
 
-loop = 100
+class Short(Reporter):
+    def __init__(self):
+        super().__init__(20)
+    def report_ranking(self, benchmarks):
+        return ''
+    def report_matrix(self, benchmarks):
+        return ''
 
-with Benchmarker(loop, width=20) as bench:
+with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
 
     v_s   = zeros(10000,float32)
     v_d   = zeros(10000,float64)
@@ -33,179 +39,177 @@ with Benchmarker(loop, width=20) as bench:
     v_i32 = zeros(10000,int32)
     v_i64 = zeros(10000,int64)
 
-    @bench('add_cd')
-    def run(bm):
-        for i in bm:
-            v_cd+v_cd
-
-    @bench('add_cs')
-    def run(bm):
-        for i in bm:
-            v_cs+v_cs
-
-    @bench('add_d')
-    def run(bm):
-        for i in bm:
-            v_d+v_d
-
-    @bench('add_di32')
-    def run(bm):
-        for i in bm:
-            v_d+v_i32
-
-    @bench('add_i1')
+    @bench('add_i1_i1')
     def run(bm):
         for i in bm:
             v_i1+v_i1
 
-    @bench('add_i8')
+    @bench('add_i8_i8')
     def run(bm):
         for i in bm:
             v_i8+v_i8
 
-    @bench('add_i16')
+    @bench('add_i16_i16')
     def run(bm):
         for i in bm:
             v_i16+v_i16
 
-    @bench('add_i32')
+    @bench('add_i32_i32')
     def run(bm):
         for i in bm:
             v_i32+v_i32
 
-    @bench('add_i64')
+    @bench('add_i64_i64')
     def run(bm):
         for i in bm:
             v_i64+v_i64
 
-    @bench('add_s')
+    @bench('add_s_s')
     def run(bm):
         for i in bm:
             v_s+v_s
 
-    @bench('add_sd')
+    @bench('add_d_d')
+    def run(bm):
+        for i in bm:
+            v_d+v_d
+    @bench('add_cd_cd')
+    def run(bm):
+        for i in bm:
+            v_cd+v_cd
+
+    @bench('add_cs_cs')
+    def run(bm):
+        for i in bm:
+            v_cs+v_cs
+
+    @bench('add_s_d')
     def run(bm):
         for i in bm:
             v_s+v_d
 
-    @bench('add_si32')
+    @bench('add_s_i32')
     def run(bm):
         for i in bm:
             v_s+v_i32
 
-
-    @bench('mul_cd')
+    @bench('add_d_i32')
     def run(bm):
         for i in bm:
-            v_cd*v_cd
-
-    @bench('mul_cs')
-    def run(bm):
-        for i in bm:
-            v_cs*v_cs
-
-    @bench('mul_d')
-    def run(bm):
-        for i in bm:
-            v_d*v_d
-
-    @bench('mul_di32')
-    def run(bm):
-        for i in bm:
-            v_d*v_i32
-
-    @bench('mul_i1')
+            v_d+v_i32
+    ################################################################
+    @bench('mul_i1_i1')
     def run(bm):
         for i in bm:
             v_i1*v_i1
 
-    @bench('mul_i8')
+    @bench('mul_i8_i8')
     def run(bm):
         for i in bm:
             v_i8*v_i8
 
-    @bench('mul_i16')
+    @bench('mul_i16_i16')
     def run(bm):
         for i in bm:
             v_i16*v_i16
 
-    @bench('mul_i32')
+    @bench('mul_i32_i32')
     def run(bm):
         for i in bm:
             v_i32*v_i32
 
-    @bench('mul_i64')
+    @bench('mul_i64_i64')
     def run(bm):
         for i in bm:
             v_i64*v_i64
 
-    @bench('mul_s')
+    @bench('mul_s_s')
     def run(bm):
         for i in bm:
             v_s*v_s
 
-    @bench('mul_sd')
+    @bench('mul_d_d')
+    def run(bm):
+        for i in bm:
+            v_d*v_d
+    @bench('mul_cd_cd')
+    def run(bm):
+        for i in bm:
+            v_cd*v_cd
+
+    @bench('mul_cs_cs')
+    def run(bm):
+        for i in bm:
+            v_cs*v_cs
+
+    @bench('mul_s_d')
     def run(bm):
         for i in bm:
             v_s*v_d
 
-    @bench('mul_si32')
+    @bench('mul_s_i32')
     def run(bm):
         for i in bm:
             v_s*v_i32
-            
 
-    @bench('fma_cd')
+    @bench('mul_d_i32')
     def run(bm):
         for i in bm:
-            v_cd*v_cd+v_cd
+            v_d*v_i32
 
-    @bench('fma_cs')
-    def run(bm):
-        for i in bm:
-            v_cs*v_cs+v_cs
-
-    @bench('fma_d')
-    def run(bm):
-        for i in bm:
-            v_d*v_d+v_d
-
-    @bench('fma_di32')
-    def run(bm):
-        for i in bm:
-            v_d*v_i32+v_i32
-
-    @bench('fma_i1')
+    ################################################################
+    @bench('fma_i1_i1_i1')
     def run(bm):
         for i in bm:
             v_i1*v_i1+v_i1
 
-    @bench('fma_i8')
+    @bench('fma_i8_i8_i8')
     def run(bm):
         for i in bm:
             v_i8*v_i8+v_i8
 
-    @bench('fma_i16')
+    @bench('fma_i16_i16_i16')
     def run(bm):
         for i in bm:
             v_i16*v_i16+v_i16
 
-    @bench('fma_i32')
+    @bench('fma_i32_i32_i32')
     def run(bm):
         for i in bm:
             v_i32*v_i32+v_i32
 
-    @bench('fma_i64')
+    @bench('fma_i64_i64_i64')
     def run(bm):
         for i in bm:
             v_i64*v_i64+v_i64
             
-    @bench('fma_s')
+    @bench('fma_s_s_s')
     def run(bm):
         for i in bm:
             v_s*v_s+v_s
 
-    @bench('fma_si32')
+    @bench('fma_d_d_d')
     def run(bm):
         for i in bm:
-            v_s*v_i32+v_i32
+            v_d*v_d+v_d
+    @bench('fma_cs_cs_cs')
+    def run(bm):
+        for i in bm:
+            v_cs*v_cs+v_cs
+    @bench('fma_cd_cd_cd')
+    def run(bm):
+        for i in bm:
+            v_cd*v_cd+v_cd
+    @bench('fma_d_i32_d')
+    def run(bm):
+        for i in bm:
+            v_d*v_i32+v_d
+
+    @bench('fma_s_i32_s')
+    def run(bm):
+        for i in bm:
+            v_s*v_i32+v_s
+    @bench('fma_s_i32_d')
+    def run(bm):
+        for i in bm:
+            v_s*v_i32+v_d

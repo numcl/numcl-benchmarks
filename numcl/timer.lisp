@@ -8,6 +8,7 @@
         system-run-time-us-s
         real-time-ms-s
         gc-run-time-ms-s)
+    (sb-ext:gc)
     (dotimes (i (+ 3 trials))
       (sb-ext:call-with-timing
        (lambda (&key
@@ -29,7 +30,8 @@
 (defmacro with-timing ((&key (trials +trials+) (name "N/A")) &body body)
   `(multiple-value-bind (usr sys real gc)
        (call-with-benchmark ,trials (lambda () ,@body))
-     (format *trace-output* "~20a ~@{~8f~^ ~}~%" ,name real (+ usr sys) usr sys gc)))
+     (format *trace-output* "~20a ~@{~6,4f~^    ~}~%" ,name real (+ usr sys) usr sys gc)
+     (finish-output *trace-output*)))
 
 (defun banner ()
-  (format *trace-output* "~20a ~@{~8a~^ ~}~%" "##" 'real 'total 'usr 'sys 'gc))
+  (format *trace-output* "~20a ~@{~6a~^    ~}~%" "##" 'real 'total 'usr 'sys 'gc))
