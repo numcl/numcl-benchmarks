@@ -19,7 +19,7 @@
 from numpy import *
 from benchmarker import Benchmarker
 
-loop = 1000
+loop = 100
 
 with Benchmarker(loop, width=20) as bench:
 

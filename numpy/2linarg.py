@@ -19,9 +19,9 @@
 from numpy import *
 from benchmarker import Benchmarker
 
-loop = 1000
+loop = 100
 
-with Benchmarker(loop, width=20) as bench:
+with Benchmarker(loop) as bench:
 
     a = zeros((100,100))
     b = zeros((100,100))
@@ -31,8 +31,8 @@ with Benchmarker(loop, width=20) as bench:
     b2 = zeros((1000,1000))
     c2 = zeros((1000,1000))
     
-    d = zeros((1000))
-    e = zeros((1000))
+    d = zeros((100))
+    e = zeros((100))
     
     @bench('diag/einsum')
     def run(bm):
@@ -66,7 +66,7 @@ with Benchmarker(loop, width=20) as bench:
         for i in bm:
             matmul(a,b,out=c)
             
-    @bench('gemm-large/einsum')
+    @bench('gemm-large/einsum', tag="slow")
     def run(bm):
         for i in bm:
             einsum('ij,jk->ik',a2,b2,out=c2)
@@ -86,15 +86,15 @@ with Benchmarker(loop, width=20) as bench:
         for i in bm:
             inner(d,e)
 
-    @bench('einsum_kron')
+    @bench('einsum_kron', tag="slow")
     def run(bm):
         for i in bm:
-            einsum('ij,kl->ikjl',b2,c2)
+            einsum('ij,kl->ikjl',a,b)
     
-    @bench('builtin_kron')
+    @bench('builtin_kron', tag="slow")
     def run(bm):
         for i in bm:
-            kron(b2,c2)
+            kron(a,b)
 
     @bench('einsum_outer')
     def run(bm):
