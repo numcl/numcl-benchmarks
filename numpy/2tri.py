@@ -32,6 +32,6 @@ with Benchmarker(loop, width=20) as bench:
     e = zeros((1000))
     
     @bench('builtin_tri')
-    def run_builtin_tri(bm):
+    def run(bm):
         for i in bm:
             tri(100)

@@ -34,6 +34,6 @@ with Benchmarker(loop, width=20) as bench:
     v_i64 = zeros(10000,int64)
 
     @bench('add_i32')
-    def run_add_i32(bm):
+    def run(bm):
         for i in bm:
             v_i32+v_i32

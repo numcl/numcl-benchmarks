@@ -34,6 +34,6 @@ with Benchmarker(loop, width=20) as bench:
     v_i64 = zeros(10000,int64)
 
     @bench('fma_si32')
-    def run_fma_si32(bm):
+    def run(bm):
         for i in bm:
             v_s*v_i32+v_i32

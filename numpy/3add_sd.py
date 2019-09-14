@@ -34,6 +34,6 @@ with Benchmarker(loop, width=20) as bench:
     v_i64 = zeros(10000,int64)
 
     @bench('add_sd')
-    def run_add_sd(bm):
+    def run(bm):
         for i in bm:
             v_s+v_d

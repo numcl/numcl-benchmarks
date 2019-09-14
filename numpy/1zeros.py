@@ -24,7 +24,7 @@ loop = 1000
 with Benchmarker(loop, width=20) as bench:
 
     @bench('zeros_1000000')
-    def run_zeros_1000000(bm):
+    def run(bm):
         for i in bm:
             a = zeros(1000000,float)
             a[0] = 1

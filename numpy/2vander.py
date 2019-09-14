@@ -32,6 +32,6 @@ with Benchmarker(loop, width=20) as bench:
     e = zeros((1000))
     
     @bench('builtin_vander')
-    def run_builtin_vander(bm):
+    def run(bm):
         for i in bm:
             vander(d)

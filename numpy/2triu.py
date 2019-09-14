@@ -32,6 +32,6 @@ with Benchmarker(loop, width=20) as bench:
     e = zeros((1000))
     
     @bench('builtin_triu')
-    def run_builtin_triu(bm):
+    def run(bm):
         for i in bm:
             triu(b)

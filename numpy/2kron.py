@@ -32,11 +32,11 @@ with Benchmarker(loop, width=20) as bench:
     e = zeros((1000))
     
     @bench('einsum_kron')
-    def run_einsum_kron(bm):
+    def run(bm):
         for i in bm:
             einsum('ij,kl->ikjl',b2,c2)
     
     @bench('builtin_kron')
-    def run_builtin_kron(bm):
+    def run(bm):
         for i in bm:
             kron(b2,c2)

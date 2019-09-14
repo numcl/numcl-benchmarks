@@ -32,11 +32,11 @@ with Benchmarker(loop, width=20) as bench:
     e = zeros((1000))
     
     @bench('einsum_inner')
-    def run_einsum_inner(bm):
+    def run(bm):
         for i in bm:
             einsum('i,i->i',d,e)
     
     @bench('builtin_inner')
-    def run_builtin_inner(bm):
+    def run(bm):
         for i in bm:
             inner(d,e)

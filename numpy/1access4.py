@@ -26,7 +26,7 @@ with Benchmarker(loop, width=20) as bench:
     a = zeros((100,100,100,100))
 
     @bench('access3')
-    def run_access2(bm):
+    def run(bm):
         for i in bm:
             for i in range(100):
                 a[i,:,i,i] = 1

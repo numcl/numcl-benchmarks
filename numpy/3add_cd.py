@@ -34,6 +34,6 @@ with Benchmarker(loop, width=20) as bench:
     v_i64 = zeros(10000,int64)
 
     @bench('add_cd')
-    def run_add_cd(bm):
+    def run(bm):
         for i in bm:
             v_cd+v_cd

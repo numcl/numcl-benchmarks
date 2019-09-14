@@ -32,11 +32,11 @@ with Benchmarker(loop, width=20) as bench:
     e = zeros((1000))
     
     @bench('einsum_vdot')
-    def run_einsum_vdot(bm):
+    def run(bm):
         for i in bm:
             einsum('i,i->',d,e)
     
     @bench('builtin_vdot')
-    def run_builtin_vdot(bm):
+    def run(bm):
         for i in bm:
             vdot(d,e)
