@@ -1,11 +1,11 @@
 #!/bin/sh
 #|-*- mode:lisp -*-|#
 #|
-exec ros -Q -- $0 "$@"
+exec ros dynamic-space-size=8000 -Q -- $0 "$@"
 |#
 (progn ;;init forms
   (ros:ensure-asdf)
-  #+quicklisp(ql:quickload '(:trivial-benchmark :numcl) :silent t)
+  #+quicklisp(ql:quickload '(:numcl) :silent t)
   )
 
 #|
@@ -27,12 +27,27 @@ NUMCL.  If not, see <http://www.gnu.org/licenses/>.
 |#
 
 (defpackage :ros.script.benchmark
-  (:use :numcl :trivial-benchmark))
+  (:use :numcl))
 (in-package :ros.script.benchmark)
 #+sbcl
 (declaim (sb-ext:muffle-conditions sb-ext:compiler-note style-warning))
 
+(load "timer.lisp")
+
 (defun main (&aux (a (zeros '(100 100 100 100) :type 'single-float)))
-  (with-timing (1000)
+  (banner)
+  (with-timing (:name "access/0")
     (dotimes (i 100)
-      (setf (aref a i t i i) 1.0))))
+      (setf (aref a i i i i) 1.0)))
+  (with-timing (:name "access/1")
+    (dotimes (i 100)
+      (setf (aref a i i i t) 1.0)))
+  (with-timing (:name "access/2")
+    (dotimes (i 100)
+      (setf (aref a i i t i) 1.0)))
+  (with-timing (:name "access/3")
+    (dotimes (i 100)
+      (setf (aref a i t i i) 1.0)))
+  (with-timing (:name "access/4")
+    (dotimes (i 100)
+      (setf (aref a t i i i) 1.0))))

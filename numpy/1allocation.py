@@ -23,6 +23,12 @@ loop = 100
 
 with Benchmarker(loop, width=20) as bench:
 
+    @bench('ones/bool')
+    def run(bm):
+        for i in bm:
+            a = ones(1000000,bool)
+            a[0] = 1
+            a[-1] = 1
     @bench('ones/int8')
     def run(bm):
         for i in bm:
