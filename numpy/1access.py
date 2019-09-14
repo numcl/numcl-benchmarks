@@ -23,17 +23,30 @@ loop = 1000
 
 with Benchmarker(loop, width=20) as bench:
 
-    v_s   = zeros(10000,float32)
-    v_d   = zeros(10000,float64)
-    v_cs  = zeros(10000,complex64)
-    v_cd  = zeros(10000,complex128)
-    v_i1  = zeros(10000,bool)
-    v_i8  = zeros(10000,int8)
-    v_i16 = zeros(10000,int16)
-    v_i32 = zeros(10000,int32)
-    v_i64 = zeros(10000,int64)
+    a = zeros((100,100,100,100))
 
-    @bench('fma_i16')
+    @bench('access/0')
     def run(bm):
         for i in bm:
-            v_i16*v_i16+v_i16
+            for i in range(100):
+                a[i,i,i,i] = 1
+    @bench('access/1')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                a[i,i,i,:] = 1
+    @bench('access/2')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                a[i,i,:,i] = 1
+    @bench('access/3')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                a[i,:,i,i] = 1
+    @bench('access/4')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                a[:,i,i,i] = 1
