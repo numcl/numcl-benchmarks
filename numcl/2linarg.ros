@@ -58,7 +58,6 @@ NUMCL.  If not, see <http://www.gnu.org/licenses/>.
     (einsum '(ij jk -> ik) a b c))
   (with-timing (:name "gemm/builtin")
     (matmul a b c))
-  #+slow
   (with-timing (:name "gemm-large/einsum")
     (einsum '(ij jk -> ik) a2 b2 c2))
   (with-timing (:name "gemm-large/builtin")

@@ -72,7 +72,7 @@ with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
         for i in bm:
             matmul(a,b,out=c)
             
-    @bench('gemm-large/einsum', tag="slow")
+    @bench('gemm-large/einsum')
     def run(bm):
         for i in bm:
             einsum('ij,jk->ik',a2,b2,out=c2)
