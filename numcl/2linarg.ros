@@ -32,7 +32,7 @@ NUMCL.  If not, see <http://www.gnu.org/licenses/>.
 #+sbcl
 (declaim (sb-ext:muffle-conditions sb-ext:compiler-note style-warning))
 
-(load "timer.lisp")
+(load (merge-pathnames "timer.lisp" *load-pathname*))
 
 (defun main (&aux
                (a (zeros '(100 100) :type 'single-float))
