@@ -3,6 +3,8 @@
 
 (defconstant +trials+ 100)
 
+(defparameter *header-width* 20)
+
 (defun call-with-benchmark (trials fn &key (warmup 3))
   (let (user-run-time-us-s
         system-run-time-us-s
@@ -43,22 +45,24 @@
           (float (/ (reduce #'max system-run-time-us-s :initial-value 0) 1000000))
           (float (/ (reduce #'max gc-run-time-ms-s :initial-value 0)     1000)))))
 
-(defmacro with-timing ((&key (trials +trials+) (name "N/A") (header-width 15)) &body body)
-  (when (< header-width (length name))
-    (setf name (subseq name 0 header-width)))
+(defmacro with-timing ((&key (trials +trials+) (name "N/A")) &body body)
+  (when (< *header-width* (length name))
+    (setf name (subseq name 0 *header-width*)))
   `(progn
      (format *trace-output* "~va ~{ ~6,4f  ~}~%"
-             ,header-width ,name
+             ,*header-width* ,name
              (call-with-benchmark ,trials (lambda () ,@body)))
      (finish-output *trace-output*)))
 
 (defun banner ()
-  (format *trace-output* "~15a ~@{~22@a                      |~}~%"
+  (format *trace-output* "~va ~@{~22@a                      |~}~%"
+          *header-width*
           "##"
           'mean
           'median
           'max)
-  (format *trace-output* "~15a ~@{ ~6a  ~}~%"
+  (format *trace-output* "~va ~@{ ~6a  ~}~%"
+          *header-width*
           "##"
           'real 'total 'usr 'sys 'gc
           'real 'total 'usr 'sys 'gc
