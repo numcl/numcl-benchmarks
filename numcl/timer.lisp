@@ -24,12 +24,12 @@
            (push real-time-ms real-time-ms-s)
            (push gc-run-time-ms gc-run-time-ms-s)))
        fn))
-    (list (float (/ (alexandria:mean real-time-ms-s)       1000))
-          (+ (float (/ (alexandria:mean user-run-time-us-s)   1000000))
-             (float (/ (alexandria:mean system-run-time-us-s) 1000000)))
-          (float (/ (alexandria:mean user-run-time-us-s)   1000000))
-          (float (/ (alexandria:mean system-run-time-us-s) 1000000))
-          (float (/ (alexandria:mean gc-run-time-ms-s)     1000))
+    (list (float (/ (reduce #'+ real-time-ms-s)       1000))
+          (+ (float (/ (reduce #'+ user-run-time-us-s)   1000000))
+             (float (/ (reduce #'+ system-run-time-us-s) 1000000)))
+          (float (/ (reduce #'+ user-run-time-us-s)   1000000))
+          (float (/ (reduce #'+ system-run-time-us-s) 1000000))
+          (float (/ (reduce #'+ gc-run-time-ms-s)     1000))
 
           (float (/ (alexandria:median real-time-ms-s)       1000))
           (+ (float (/ (alexandria:median user-run-time-us-s)   1000000))
@@ -58,7 +58,7 @@
   (format *trace-output* "~va ~@{~22@a                      |~}~%"
           *header-width*
           "##"
-          'mean
+          'sum
           'median
           'max)
   (format *trace-output* "~va ~@{ ~6a  ~}~%"
