@@ -4,6 +4,8 @@
 
 regexp=${1:-".*"}
 
+ls numcl/logs/*.log | grep "$regexp" | xargs -n 1 rm
+
 make -j 4
 
 titles (){
