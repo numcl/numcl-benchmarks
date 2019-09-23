@@ -144,3 +144,35 @@ with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
             a = empty(1000000,float64)
             a[0] = 1
             a[-1] = 1
+
+    a = empty(1000000,int8)
+    @bench('copy/int8')
+    def run(bm):
+        for i in bm:
+            b = copy(a)
+    a = empty(1000000,int16)
+    @bench('copy/int16')
+    def run(bm):
+        for i in bm:
+            b = copy(a)
+    a = empty(1000000,int32)
+    @bench('copy/int32')
+    def run(bm):
+        for i in bm:
+            b = copy(a)
+    a = empty(1000000,int64)
+    @bench('copy/int64')
+    def run(bm):
+        for i in bm:
+            b = copy(a)
+    a = empty(1000000,float32)
+    @bench('copy/float32')
+    def run(bm):
+        for i in bm:
+            b = copy(a)
+    a = empty(1000000,float64)
+    @bench('copy/float64')
+    def run(bm):
+        for i in bm:
+            b = copy(a)
+            
