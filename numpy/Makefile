@@ -1,12 +1,12 @@
 
 
-all: $(patsubst %.py,logs/%.json,$(wildcard *.py))
+all: $(patsubst %.py,logs/%.log,$(wildcard *.py))
 
 logs:
 	-mkdir $@
 
-logs/%.json: %.py logs
-	python3 $< -f 'tag!=slow' -o $@
+logs/%.log: %.py logs
+	python3 $< -f 'tag!=slow' > $@
 
 clean:
-	-rm logs/*.json
+	-rm logs/*.log
