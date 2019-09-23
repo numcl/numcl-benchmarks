@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Usage : ./report.sh [regexp]
+
+regexp=${1:-".*"}
 
 make -j 4
 
@@ -25,5 +28,6 @@ collect_numpy (){
     echo "title numcl numpy"
     paste <(titles) \
           <(collect_numcl) \
-          <(collect_numpy)
+          <(collect_numpy) \
+          | grep "$regexp"
 ) | column -t | tee $(date +%Y%m%d%H%M).log
