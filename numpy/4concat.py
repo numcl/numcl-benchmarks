@@ -32,39 +32,39 @@ with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
     a = zeros((100,100,100))
     b = zeros((100,100,100))
 
-    @bench('concatenate/0')
+    @bench('4concat/concatenate/0')
     def run(bm):
         for i in bm:
             concatenate((a, b), axis=0)
-    @bench('concatenate/1')
+    @bench('4concat/concatenate/1')
     def run(bm):
         for i in bm:
             concatenate((a, b), axis=1)
-    @bench('concatenate/2')
+    @bench('4concat/concatenate/2')
     def run(bm):
         for i in bm:
             concatenate((a, b), axis=2)
-    @bench('stack/0')
+    @bench('4concat/stack/0')
     def run(bm):
         for i in bm:
             stack((a, b), axis=0)
-    @bench('stack/1')
+    @bench('4concat/stack/1')
     def run(bm):
         for i in bm:
             stack((a, b), axis=1)
-    @bench('stack/2')
+    @bench('4concat/stack/2')
     def run(bm):
         for i in bm:
             stack((a, b), axis=2)
-    # @bench('split/0')
+    # @bench('4concat/split/0')
     # def run(bm):
     #     for i in bm:
     #         split(a, axis=0)
-    # @bench('split/1')
+    # @bench('4concat/split/1')
     # def run(bm):
     #     for i in bm:
     #         split(a, axis=1)
-    # @bench('split/2')
+    # @bench('4concat/split/2')
     # def run(bm):
     #     for i in bm:
     #         split(a, axis=2)

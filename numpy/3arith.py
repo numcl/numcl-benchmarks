@@ -39,177 +39,177 @@ with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
     v_i32 = zeros(10000,int32)
     v_i64 = zeros(10000,int64)
 
-    @bench('add_i1_i1')
+    @bench('3arith/add_i1_i1')
     def run(bm):
         for i in bm:
             v_i1+v_i1
 
-    @bench('add_i8_i8')
+    @bench('3arith/add_i8_i8')
     def run(bm):
         for i in bm:
             v_i8+v_i8
 
-    @bench('add_i16_i16')
+    @bench('3arith/add_i16_i16')
     def run(bm):
         for i in bm:
             v_i16+v_i16
 
-    @bench('add_i32_i32')
+    @bench('3arith/add_i32_i32')
     def run(bm):
         for i in bm:
             v_i32+v_i32
 
-    @bench('add_i64_i64')
+    @bench('3arith/add_i64_i64')
     def run(bm):
         for i in bm:
             v_i64+v_i64
 
-    @bench('add_s_s')
+    @bench('3arith/add_s_s')
     def run(bm):
         for i in bm:
             v_s+v_s
 
-    @bench('add_d_d')
+    @bench('3arith/add_d_d')
     def run(bm):
         for i in bm:
             v_d+v_d
-    @bench('add_cd_cd')
+    @bench('3arith/add_cd_cd')
     def run(bm):
         for i in bm:
             v_cd+v_cd
 
-    @bench('add_cs_cs')
+    @bench('3arith/add_cs_cs')
     def run(bm):
         for i in bm:
             v_cs+v_cs
 
-    @bench('add_s_d')
+    @bench('3arith/add_s_d')
     def run(bm):
         for i in bm:
             v_s+v_d
 
-    @bench('add_s_i32')
+    @bench('3arith/add_s_i32')
     def run(bm):
         for i in bm:
             v_s+v_i32
 
-    @bench('add_d_i32')
+    @bench('3arith/add_d_i32')
     def run(bm):
         for i in bm:
             v_d+v_i32
     ################################################################
-    @bench('mul_i1_i1')
+    @bench('3arith/mul_i1_i1')
     def run(bm):
         for i in bm:
             v_i1*v_i1
 
-    @bench('mul_i8_i8')
+    @bench('3arith/mul_i8_i8')
     def run(bm):
         for i in bm:
             v_i8*v_i8
 
-    @bench('mul_i16_i16')
+    @bench('3arith/mul_i16_i16')
     def run(bm):
         for i in bm:
             v_i16*v_i16
 
-    @bench('mul_i32_i32')
+    @bench('3arith/mul_i32_i32')
     def run(bm):
         for i in bm:
             v_i32*v_i32
 
-    @bench('mul_i64_i64')
+    @bench('3arith/mul_i64_i64')
     def run(bm):
         for i in bm:
             v_i64*v_i64
 
-    @bench('mul_s_s')
+    @bench('3arith/mul_s_s')
     def run(bm):
         for i in bm:
             v_s*v_s
 
-    @bench('mul_d_d')
+    @bench('3arith/mul_d_d')
     def run(bm):
         for i in bm:
             v_d*v_d
-    @bench('mul_cd_cd')
+    @bench('3arith/mul_cd_cd')
     def run(bm):
         for i in bm:
             v_cd*v_cd
 
-    @bench('mul_cs_cs')
+    @bench('3arith/mul_cs_cs')
     def run(bm):
         for i in bm:
             v_cs*v_cs
 
-    @bench('mul_s_d')
+    @bench('3arith/mul_s_d')
     def run(bm):
         for i in bm:
             v_s*v_d
 
-    @bench('mul_s_i32')
+    @bench('3arith/mul_s_i32')
     def run(bm):
         for i in bm:
             v_s*v_i32
 
-    @bench('mul_d_i32')
+    @bench('3arith/mul_d_i32')
     def run(bm):
         for i in bm:
             v_d*v_i32
 
     ################################################################
-    @bench('fma_i1_i1_i1')
+    @bench('3arith/fma_i1_i1_i1')
     def run(bm):
         for i in bm:
             v_i1*v_i1+v_i1
 
-    @bench('fma_i8_i8_i8')
+    @bench('3arith/fma_i8_i8_i8')
     def run(bm):
         for i in bm:
             v_i8*v_i8+v_i8
 
-    @bench('fma_i16_i16_i16')
+    @bench('3arith/fma_i16_i16_i16')
     def run(bm):
         for i in bm:
             v_i16*v_i16+v_i16
 
-    @bench('fma_i32_i32_i32')
+    @bench('3arith/fma_i32_i32_i32')
     def run(bm):
         for i in bm:
             v_i32*v_i32+v_i32
 
-    @bench('fma_i64_i64_i64')
+    @bench('3arith/fma_i64_i64_i64')
     def run(bm):
         for i in bm:
             v_i64*v_i64+v_i64
             
-    @bench('fma_s_s_s')
+    @bench('3arith/fma_s_s_s')
     def run(bm):
         for i in bm:
             v_s*v_s+v_s
 
-    @bench('fma_d_d_d')
+    @bench('3arith/fma_d_d_d')
     def run(bm):
         for i in bm:
             v_d*v_d+v_d
-    @bench('fma_cs_cs_cs')
+    @bench('3arith/fma_cs_cs_cs')
     def run(bm):
         for i in bm:
             v_cs*v_cs+v_cs
-    @bench('fma_cd_cd_cd')
+    @bench('3arith/fma_cd_cd_cd')
     def run(bm):
         for i in bm:
             v_cd*v_cd+v_cd
-    @bench('fma_d_i32_d')
+    @bench('3arith/fma_d_i32_d')
     def run(bm):
         for i in bm:
             v_d*v_i32+v_d
 
-    @bench('fma_s_i32_s')
+    @bench('3arith/fma_s_i32_s')
     def run(bm):
         for i in bm:
             v_s*v_i32+v_s
-    @bench('fma_s_i32_d')
+    @bench('3arith/fma_s_i32_d')
     def run(bm):
         for i in bm:
             v_s*v_i32+v_d

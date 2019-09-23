@@ -29,128 +29,128 @@ class Short(Reporter):
 
 with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
 
-    @bench('ones/bool')
+    @bench('1allocation/ones/bool')
     def run(bm):
         for i in bm:
             a = ones(1000000,bool)
             a[0] = 1
             a[-1] = 1
-    @bench('ones/int8')
+    @bench('1allocation/ones/int8')
     def run(bm):
         for i in bm:
             a = ones(1000000,int8)
             a[0] = 1
             a[-1] = 1
-    @bench('ones/int16')
+    @bench('1allocation/ones/int16')
     def run(bm):
         for i in bm:
             a = ones(1000000,int16)
             a[0] = 1
             a[-1] = 1
-    @bench('ones/int32')
+    @bench('1allocation/ones/int32')
     def run(bm):
         for i in bm:
             a = ones(1000000,int32)
             a[0] = 1
             a[-1] = 1
-    @bench('ones/int64')
+    @bench('1allocation/ones/int64')
     def run(bm):
         for i in bm:
             a = ones(1000000,int64)
             a[0] = 1
             a[-1] = 1
-    @bench('ones/float32')
+    @bench('1allocation/ones/float32')
     def run(bm):
         for i in bm:
             a = ones(1000000,float32)
             a[0] = 1
             a[-1] = 1
-    @bench('ones/float64')
+    @bench('1allocation/ones/float64')
     def run(bm):
         for i in bm:
             a = ones(1000000,float64)
             a[0] = 1
             a[-1] = 1
 
-    @bench('zeros/bool')
+    @bench('1allocation/zeros/bool')
     def run(bm):
         for i in bm:
             a = zeros(1000000,bool)
             a[0] = 1
             a[-1] = 1
-    @bench('zeros/int8')
+    @bench('1allocation/zeros/int8')
     def run(bm):
         for i in bm:
             a = zeros(1000000,int8)
             a[0] = 1
             a[-1] = 1
-    @bench('zeros/int16')
+    @bench('1allocation/zeros/int16')
     def run(bm):
         for i in bm:
             a = zeros(1000000,int16)
             a[0] = 1
             a[-1] = 1
-    @bench('zeros/int32')
+    @bench('1allocation/zeros/int32')
     def run(bm):
         for i in bm:
             a = zeros(1000000,int32)
             a[0] = 1
             a[-1] = 1
-    @bench('zeros/int64')
+    @bench('1allocation/zeros/int64')
     def run(bm):
         for i in bm:
             a = zeros(1000000,int64)
             a[0] = 1
             a[-1] = 1
-    @bench('zeros/float32')
+    @bench('1allocation/zeros/float32')
     def run(bm):
         for i in bm:
             a = zeros(1000000,float32)
             a[0] = 1
             a[-1] = 1
-    @bench('zeros/float64')
+    @bench('1allocation/zeros/float64')
     def run(bm):
         for i in bm:
             a = zeros(1000000,float64)
             a[0] = 1
             a[-1] = 1
-    @bench('empty/bool')
+    @bench('1allocation/empty/bool')
     def run(bm):
         for i in bm:
             a = empty(1000000,bool)
             a[0] = 1
             a[-1] = 1
-    @bench('empty/int8')
+    @bench('1allocation/empty/int8')
     def run(bm):
         for i in bm:
             a = empty(1000000,int8)
             a[0] = 1
             a[-1] = 1
-    @bench('empty/int16')
+    @bench('1allocation/empty/int16')
     def run(bm):
         for i in bm:
             a = empty(1000000,int16)
             a[0] = 1
             a[-1] = 1
-    @bench('empty/int32')
+    @bench('1allocation/empty/int32')
     def run(bm):
         for i in bm:
             a = empty(1000000,int32)
             a[0] = 1
             a[-1] = 1
-    @bench('empty/int64')
+    @bench('1allocation/empty/int64')
     def run(bm):
         for i in bm:
             a = empty(1000000,int64)
             a[0] = 1
             a[-1] = 1
-    @bench('empty/float32')
+    @bench('1allocation/empty/float32')
     def run(bm):
         for i in bm:
             a = empty(1000000,float32)
             a[0] = 1
             a[-1] = 1
-    @bench('empty/float64')
+    @bench('1allocation/empty/float64')
     def run(bm):
         for i in bm:
             a = empty(1000000,float64)
@@ -158,37 +158,37 @@ with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
             a[-1] = 1
 
     a = empty(1000000,bool)
-    @bench('copy/bool')
+    @bench('1allocation/copy/bool')
     def run(bm):
         for i in bm:
             b = copy(a)
     a = empty(1000000,int8)
-    @bench('copy/int8')
+    @bench('1allocation/copy/int8')
     def run(bm):
         for i in bm:
             b = copy(a)
     a = empty(1000000,int16)
-    @bench('copy/int16')
+    @bench('1allocation/copy/int16')
     def run(bm):
         for i in bm:
             b = copy(a)
     a = empty(1000000,int32)
-    @bench('copy/int32')
+    @bench('1allocation/copy/int32')
     def run(bm):
         for i in bm:
             b = copy(a)
     a = empty(1000000,int64)
-    @bench('copy/int64')
+    @bench('1allocation/copy/int64')
     def run(bm):
         for i in bm:
             b = copy(a)
     a = empty(1000000,float32)
-    @bench('copy/float32')
+    @bench('1allocation/copy/float32')
     def run(bm):
         for i in bm:
             b = copy(a)
     a = empty(1000000,float64)
-    @bench('copy/float64')
+    @bench('1allocation/copy/float64')
     def run(bm):
         for i in bm:
             b = copy(a)

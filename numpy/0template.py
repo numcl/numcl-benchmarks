@@ -31,7 +31,7 @@ with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
 
     a = 0
 
-    @bench('dummy/0')
+    @bench('0template/dummy/0')
     def run(bm):
         global a
         for i in bm:

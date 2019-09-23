@@ -40,104 +40,104 @@ with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
     d = zeros((100))
     e = zeros((100))
     
-    @bench('diag/einsum')
+    @bench('2linarg/diag/einsum')
     def run(bm):
         for i in bm:
             einsum('ii->i',a)
     
-    @bench('diag/builtin')
+    @bench('2linarg/diag/builtin')
     def run(bm):
         for i in bm:
             diag(a)
 
-    @bench('eye/naive')
+    @bench('2linarg/eye/naive')
     def run(bm):
         for i in bm:
             a = zeros((100,100))
             for j in range(100):
                 a[j,j] = 1
             
-    @bench('eye/builtin')
+    @bench('2linarg/eye/builtin')
     def run(bm):
         for i in bm:
             eye(100)
 
-    @bench('gemm/einsum')
+    @bench('2linarg/gemm/einsum')
     def run(bm):
         for i in bm:
             einsum('ij,jk->ik',a,b,out=c)
     
-    @bench('gemm/builtin')
+    @bench('2linarg/gemm/builtin')
     def run(bm):
         for i in bm:
             matmul(a,b,out=c)
             
-    @bench('gemm-large/einsum')
+    @bench('2linarg/gemm-large/einsum')
     def run(bm):
         for i in bm:
             einsum('ij,jk->ik',a2,b2,out=c2)
     
-    @bench('gemm-large/builtin')
+    @bench('2linarg/gemm-large/builtin')
     def run(bm):
         for i in bm:
             matmul(a2,b2,out=c2)
 
-    @bench('inner/einsum')
+    @bench('2linarg/inner/einsum')
     def run(bm):
         for i in bm:
             einsum('i,i->',d,e)
     
-    @bench('inner/builtin')
+    @bench('2linarg/inner/builtin')
     def run(bm):
         for i in bm:
             inner(d,e)
 
-    @bench('kron/einsum', tag="slow")
+    @bench('2linarg/kron/einsum', tag="slow")
     def run(bm):
         for i in bm:
             einsum('ij,kl->ikjl',a,b)
     
-    @bench('kron/builtin', tag="slow")
+    @bench('2linarg/kron/builtin', tag="slow")
     def run(bm):
         for i in bm:
             kron(a,b)
 
-    @bench('outer/einsum')
+    @bench('2linarg/outer/einsum')
     def run(bm):
         for i in bm:
             einsum('i,j->ij',d,e)
     
-    @bench('outer/builtin')
+    @bench('2linarg/outer/builtin')
     def run(bm):
         for i in bm:
             outer(d,e)
 
-    @bench('tri/builtin')
+    @bench('2linarg/tri/builtin')
     def run(bm):
         for i in bm:
             tri(100)
 
-    @bench('tril/builtin')
+    @bench('2linarg/tril/builtin')
     def run(bm):
         for i in bm:
             tril(b)
 
-    @bench('triu/builtin')
+    @bench('2linarg/triu/builtin')
     def run(bm):
         for i in bm:
             triu(b)
 
-    @bench('vander/builtin')
+    @bench('2linarg/vander/builtin')
     def run(bm):
         for i in bm:
             vander(d)
 
-    @bench('vdot/einsum')
+    @bench('2linarg/vdot/einsum')
     def run(bm):
         for i in bm:
             einsum('i,i->',conjugate(d),e)
     
-    @bench('vdot/builtin')
+    @bench('2linarg/vdot/builtin')
     def run(bm):
         for i in bm:
             vdot(d,e)

@@ -31,27 +31,27 @@ with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
 
     a = zeros((100,100,100,100))
 
-    @bench('access/0')
+    @bench('1access/access/0')
     def run(bm):
         for i in bm:
             for i in range(100):
                 a[i,i,i,i] = 1
-    @bench('access/1')
+    @bench('1access/access/1')
     def run(bm):
         for i in bm:
             for i in range(100):
                 a[i,i,i,:] = 1
-    @bench('access/2')
+    @bench('1access/access/2')
     def run(bm):
         for i in bm:
             for i in range(100):
                 a[i,i,:,i] = 1
-    @bench('access/3')
+    @bench('1access/access/3')
     def run(bm):
         for i in bm:
             for i in range(100):
                 a[i,:,i,i] = 1
-    @bench('access/4')
+    @bench('1access/access/4')
     def run(bm):
         for i in bm:
             for i in range(100):

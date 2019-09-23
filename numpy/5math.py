@@ -32,47 +32,47 @@ with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
     a = zeros((100,100,100))
     b = ones ((100,100,100))
 
-    @bench('sin/0')
+    @bench('5math/sin/0')
     def run(bm):
         for i in bm:
             sin(a)
-    @bench('cos/0')
+    @bench('5math/cos/0')
     def run(bm):
         for i in bm:
             cos(a)
-    @bench('tan/0')
+    @bench('5math/tan/0')
     def run(bm):
         for i in bm:
             tan(a)
-    @bench('sinh/0')
+    @bench('5math/sinh/0')
     def run(bm):
         for i in bm:
             sinh(a)
-    @bench('cosh/0')
+    @bench('5math/cosh/0')
     def run(bm):
         for i in bm:
             cosh(a)
-    @bench('tanh/0')
+    @bench('5math/tanh/0')
     def run(bm):
         for i in bm:
             tanh(a)
-    @bench('asin/0')
+    @bench('5math/asin/0')
     def run(bm):
         for i in bm:
             arcsin(a)
-    @bench('acos/0')
+    @bench('5math/acos/0')
     def run(bm):
         for i in bm:
             arccos(a)
-    @bench('atan/0')
+    @bench('5math/atan/0')
     def run(bm):
         for i in bm:
             arctan(a)
-    @bench('exp/0')
+    @bench('5math/exp/0')
     def run(bm):
         for i in bm:
             exp(a)
-    @bench('log/0')
+    @bench('5math/log/0')
     def run(bm):
         for i in bm:
             log(b)
