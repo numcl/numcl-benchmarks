@@ -8,7 +8,7 @@ logs:
 # %.bin: %.ros
 # 	ros dump executable $< -o $@
 
-logs/%.log: %.ros logs timer.lisp
+logs/%.log: %.ros timer.lisp
 	./$< > $@
 
 clean:
