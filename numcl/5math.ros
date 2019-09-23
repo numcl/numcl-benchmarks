@@ -1,0 +1,63 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros dynamic-space-size=8000 -Q -- $0 "$@"
+|#
+(progn ;;init forms
+  (ros:ensure-asdf)
+  #+quicklisp(ql:quickload '(:numcl) :silent t)
+  )
+
+#|
+This file is a part of NUMCL project.
+Copyright (c) 2019 IBM Corporation
+SPDX-License-Identifier: LGPL-3.0-or-later
+
+NUMCL is free software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any
+later version.
+
+NUMCL is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+NUMCL.  If not, see <http://www.gnu.org/licenses/>.
+|#
+
+(defpackage :ros.script.benchmark
+  (:use :numcl))
+(in-package :ros.script.benchmark)
+#+sbcl
+(declaim (sb-ext:muffle-conditions sb-ext:compiler-note style-warning))
+
+(load (merge-pathnames "timer.lisp" *load-pathname*))
+
+
+(defun main (&aux
+               (a (zeros '(100 100 100) :type 'single-float))
+               (b (ones  '(100 100 100) :type 'single-float)))
+  (banner)
+  (with-timing (:name "sin/0")
+    (sin a))
+  (with-timing (:name "cos/0")
+    (cos a))
+  (with-timing (:name "tan/0")
+    (tan a))
+  (with-timing (:name "sinh/0")
+    (sinh a))
+  (with-timing (:name "cosh/0")
+    (cosh a))
+  (with-timing (:name "tanh/0")
+    (tanh a))
+  (with-timing (:name "asin/0")
+    (asin a))
+  (with-timing (:name "acos/0")
+    (acos a))
+  (with-timing (:name "atan/0")
+    (atan a))
+  (with-timing (:name "exp/0")
+    (exp a))
+  (with-timing (:name "log/0")
+    (log b)))
