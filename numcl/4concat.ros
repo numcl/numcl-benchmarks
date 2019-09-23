@@ -1,0 +1,53 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros dynamic-space-size=8000 -Q -- $0 "$@"
+|#
+(progn ;;init forms
+  (ros:ensure-asdf)
+  #+quicklisp(ql:quickload '(:numcl) :silent t)
+  )
+
+#|
+This file is a part of NUMCL project.
+Copyright (c) 2019 IBM Corporation
+SPDX-License-Identifier: LGPL-3.0-or-later
+
+NUMCL is free software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any
+later version.
+
+NUMCL is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+NUMCL.  If not, see <http://www.gnu.org/licenses/>.
+|#
+
+(defpackage :ros.script.benchmark
+  (:use :numcl))
+(in-package :ros.script.benchmark)
+#+sbcl
+(declaim (sb-ext:muffle-conditions sb-ext:compiler-note style-warning))
+
+(load (merge-pathnames "timer.lisp" *load-pathname*))
+
+
+(defun main (&aux
+               (a (zeros '(100 100 100) :type 'single-float))
+               (b (zeros '(100 100 100) :type 'single-float)))
+  (banner)
+  (with-timing (:name "concatenate/0")
+    (concatenate (list a b) :axis 0))
+  (with-timing (:name "concatenate/1")
+    (concatenate (list a b) :axis 1))
+  (with-timing (:name "concatenate/2")
+    (concatenate (list a b) :axis 2))
+  (with-timing (:name "stack/0")
+    (stack (list a b) :axis 0))
+  (with-timing (:name "stack/1")
+    (stack (list a b) :axis 1))
+  (with-timing (:name "stack/2")
+    (stack (list a b) :axis 2)))
