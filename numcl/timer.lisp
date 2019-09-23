@@ -3,7 +3,7 @@
 
 (defconstant +trials+ 100)
 
-(defparameter *header-width* 20)
+(defparameter *header-width* 30)
 
 (defun call-with-benchmark (trials fn &key (warmup 3))
   (let (user-run-time-us-s
@@ -52,7 +52,8 @@
   `(progn
      ;; the numbers are milliseconds so we just print 0 for the fourth digit below the dot
      (format *trace-output* "~va ~{~:{ ~4@a.~3,,,'0@a0  ~} ~}~%"
-             ,*header-width* ,name
+             ,*header-width*
+             ,(cl:concatenate 'string (or (pathname-name *load-pathname*) "") "/" name)
              (call-with-benchmark ,trials (lambda () ,@body)))
      (finish-output *trace-output*)))
 
