@@ -36,8 +36,8 @@ NUMCL.  If not, see <http://www.gnu.org/licenses/>.
 
 
 (defun main (&aux
-               (a (zeros '(100 100 100) :type 'single-float))
-               (b (zeros '(100 100 100) :type 'single-float)))
+               (a (zeros '(10 10 10) :type 'single-float))
+               (b (zeros '(10 10 10) :type 'single-float)))
   (banner)
   (with-timing (:name "concatenate/0")
     (concatenate (list a b) :axis 0))

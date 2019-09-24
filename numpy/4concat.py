@@ -29,8 +29,8 @@ class Short(Reporter):
 
 with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
 
-    a = zeros((100,100,100))
-    b = zeros((100,100,100))
+    a = zeros((10,10,10))
+    b = zeros((10,10,10))
 
     @bench('4concat/concatenate/0')
     def run(bm):
