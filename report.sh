@@ -4,7 +4,7 @@
 
 regexp=${1:-".*"}
 
-ls numcl/logs/*.log | grep "$regexp" | xargs -n 1 rm
+ls numcl/logs/*.log | grep "$regexp" | xargs -n 1 rm -v
 
 make -j 4
 
