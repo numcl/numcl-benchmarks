@@ -2,9 +2,14 @@
 
 # Usage : ./report.sh [regexp]
 
-regexp=${1:-".*"}
+regexp=$1
 
-ls numcl/logs/*.log | grep "$regexp" | xargs -n 1 rm -v
+if [ -z $regexp ]
+then
+    regexp=".*"
+else
+    ls numcl/logs/*.log | grep "$regexp" | xargs -n 1 rm -v
+fi
 
 make -j 4
 
