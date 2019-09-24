@@ -2,10 +2,8 @@
 
 all: $(patsubst %.py,logs/%.log,$(wildcard *.py))
 
-logs:
-	-mkdir $@
-
-logs/%.log: %.py logs
+logs/%.log: %.py
+	mkdir -p logs
 	python3 $< -f 'tag!=slow' > $@
 
 clean:
