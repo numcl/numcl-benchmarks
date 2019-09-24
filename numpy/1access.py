@@ -30,29 +30,121 @@ class Short(Reporter):
 with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
 
     a = zeros((100,100,100,100))
+    b = zeros((100,100,100))
+    c = zeros((100,100))
+    d = zeros((100))
+    tmp = 0.0
 
-    @bench('1access/access/0')
+    @bench('1access/write/0')
     def run(bm):
         for i in bm:
             for i in range(100):
                 a[i,i,i,i] = 1
-    @bench('1access/access/1')
+    @bench('1access/write/1')
     def run(bm):
         for i in bm:
             for i in range(100):
                 a[i,i,i,:] = 1
-    @bench('1access/access/2')
+    @bench('1access/write/2')
     def run(bm):
         for i in bm:
             for i in range(100):
                 a[i,i,:,i] = 1
-    @bench('1access/access/3')
+    @bench('1access/write/3')
     def run(bm):
         for i in bm:
             for i in range(100):
                 a[i,:,i,i] = 1
-    @bench('1access/access/4')
+    @bench('1access/write/4')
     def run(bm):
         for i in bm:
             for i in range(100):
                 a[:,i,i,i] = 1
+    @bench('1access/read/0')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                tmp = a[i,i,i,i]
+    @bench('1access/read/1')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                tmp = a[i,i,i,:]
+    @bench('1access/read/2')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                tmp = a[i,i,:,i]
+    @bench('1access/read/3')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                tmp = a[i,:,i,i]
+    @bench('1access/read/4')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                tmp = a[:,i,i,i]
+    
+    @bench('1access/write-range/0')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                a[i,20:50,i,i] = 1
+    @bench('1access/write-range/1')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                a[i,20:50,i,:] = 1
+    @bench('1access/write-range/2')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                a[i,20:50,:,i] = 1
+    @bench('1access/write-range/3')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                a[i,:,20:50,i] = 1
+    @bench('1access/write-range/4')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                a[:,i,20:50,i] = 1
+    @bench('1access/read-range/0')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                tmp = a[i,20:50,i,i]
+    @bench('1access/read-range/1')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                tmp = a[i,20:50,i,:]
+    @bench('1access/read-range/2')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                tmp = a[i,20:50,:,i]
+    @bench('1access/read-range/3')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                tmp = a[i,:,20:50,i]
+    @bench('1access/read-range/4')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                tmp = a[:,i,20:50,i]
+
+    @bench('1access/write-batch/0')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                a[i] = b
+    @bench('1access/write-batch/1')
+    def run(bm):
+        for i in bm:
+            for i in range(100):
+                for j in range(100):
+                    a[i,j] = b[j]
