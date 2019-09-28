@@ -161,35 +161,61 @@ with Benchmarker(loop=100, filter="tag!=slow", reporter=Short()) as bench:
     @bench('1allocation/copy/bool')
     def run(bm):
         for i in bm:
-            b = copy(a)
+            copy(a)
     a = empty(1000000,int8)
     @bench('1allocation/copy/int8')
     def run(bm):
         for i in bm:
-            b = copy(a)
+            copy(a)
     a = empty(1000000,int16)
     @bench('1allocation/copy/int16')
     def run(bm):
         for i in bm:
-            b = copy(a)
+            copy(a)
     a = empty(1000000,int32)
     @bench('1allocation/copy/int32')
     def run(bm):
         for i in bm:
-            b = copy(a)
+            copy(a)
     a = empty(1000000,int64)
     @bench('1allocation/copy/int64')
     def run(bm):
         for i in bm:
-            b = copy(a)
+            copy(a)
     a = empty(1000000,float32)
     @bench('1allocation/copy/float32')
     def run(bm):
         for i in bm:
-            b = copy(a)
+            copy(a)
     a = empty(1000000,float64)
     @bench('1allocation/copy/float64')
     def run(bm):
         for i in bm:
-            b = copy(a)
+            copy(a)
+
+    @bench('1allocation/arange/int8')
+    def run(bm):
+        for i in bm:
+            arange(127,dtype=int8)
+    @bench('1allocation/arange/int16')
+    def run(bm):
+        for i in bm:
+            arange(127,dtype=int16)
+    @bench('1allocation/arange/int32')
+    def run(bm):
+        for i in bm:
+            arange(127,dtype=int32)
+    @bench('1allocation/arange/int64')
+    def run(bm):
+        for i in bm:
+            arange(127,dtype=int64)
+    @bench('1allocation/arange/float32')
+    def run(bm):
+        for i in bm:
+            arange(127.0,dtype=float32)
+    @bench('1allocation/arange/float64')
+    def run(bm):
+        for i in bm:
+            arange(127.0,dtype=float64)
             
+    
