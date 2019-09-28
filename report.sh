@@ -31,10 +31,19 @@ collect_numpy (){
     done
 }
 
+collect_ratio (){
+    paste <(collect_numcl) <(collect_numpy) | while read numcl numpy
+    do
+        python -c "print('{:6.4g}'.format($numcl / $numpy))" 2>/dev/null || echo "N/A"
+    done
+}
+
+
 (
-    echo "title numcl numpy"
+    echo "title numcl numpy cl/py"
     paste <(titles) \
           <(collect_numcl) \
           <(collect_numpy) \
+          <(collect_ratio) \
           | grep "$regexp"
 ) | column -t | tee $(date +%Y%m%d%H%M).log
