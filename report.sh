@@ -11,7 +11,7 @@ else
     ls numcl/logs/*.log | grep "$regexp" | xargs -n 1 rm -v
 fi
 
-make -j 4
+make -j $(($(grep -c "^processor" /proc/cpuinfo)/2))
 
 titles (){
     cat numcl/logs/*.log numpy/logs/*.log | awk -f report.awk | cut -f1 | sort | uniq
