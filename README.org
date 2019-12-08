@@ -10,7 +10,7 @@ This repository is part of NUMCL.
 
 numpy: =pip3 install numpy benchmarker=
 
-numcl: =ros install numcl/constantfold numcl/gtype numcl/specialized-function numcl/numcl trivial-benchmarks=
+numcl: =ros install numcl/constantfold numcl/gtype numcl/specialized-function numcl/numcl trivial-benchmark=
 
 * Author, License, Copyright
 
