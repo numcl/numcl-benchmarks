@@ -12,6 +12,8 @@ numpy: =pip3 install numpy benchmarker=
 
 numcl: =ros install numcl/constantfold numcl/gtype numcl/specialized-function numcl/numcl trivial-benchmark=
 
+general: awk, make, other general unix tools
+
 * Author, License, Copyright
 
 Masataro Asai (guicho2.71828@gmail.com)
