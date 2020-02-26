@@ -42,7 +42,7 @@ process-header (){
 
 collect (){
     process-header $1
-    memo titles | while read title
+    memo titles | tail -n +2 | while read title
     do
         cat $1/*.log | awk -f report.awk | (grep -m 1 $title || echo "N/A" ) | cut -f2
     done
@@ -50,7 +50,7 @@ collect (){
 
 ratio (){
     echo "$(process-header $1)/$(process-header $2)"
-    paste <(memo collect $1) <(memo collect $2) | while read first second
+    paste <(memo collect $1) <(memo collect $2) | tail -n +2 | while read first second
     do
         python -c "print('{:6.4g}'.format($first / $second))" 2>/dev/null || echo "N/A"
     done
