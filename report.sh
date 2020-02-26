@@ -37,7 +37,7 @@ titles (){
 }
 
 process-header (){
-    echo $1 | sed 's/logs-\?//g;s_/$__g;s_/_._g'
+    echo $1 | sed 's/logs-\?//g;s_/$__g;s_/_@_g' | cut -c-12
 }
 
 collect (){
@@ -65,11 +65,9 @@ export -f memo titles collect ratio process-header
 columns=
 {
     columns="$columns $(memofile titles)"
-    columns="$columns $(memofile collect numpy/logs)"
-    for d in numcl/logs*
+    for d in numcl/logs* numpy/logs
     do
         columns="$columns $(memofile collect $d)"
-        columns="$columns $(memofile ratio $d numpy/logs)"
         if ! [ -z $d2 ]
         then
                columns="$columns $(memofile ratio $d2 $d)"
