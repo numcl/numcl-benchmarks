@@ -1,14 +1,15 @@
 
+version = $(shell ros -s numcl -e "(write-sequence (numcl:numcl-version) *standard-output*)")
 
-all: $(patsubst %.ros,logs/%.log,$(wildcard *.ros))
+all: $(patsubst %.ros,logs-$(version)/%.log,$(wildcard *.ros))
 
-logs/0template.log: 0template.ros timer.lisp
-	mkdir -p logs
+logs-$(version)/0template.log: 0template.ros timer.lisp
+	mkdir -p logs-$(version)
 	./$< > $@
 
-logs/%.log: %.ros timer.lisp logs/0template.log
-	mkdir -p logs
+logs-$(version)/%.log: %.ros timer.lisp logs-$(version)/0template.log
+	mkdir -p logs-$(version)
 	./$< > $@
 
 clean:
-	-rm logs/*.log
+	-rm logs-$(version)/*.log
