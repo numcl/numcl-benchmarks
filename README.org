@@ -4,7 +4,19 @@ This repository is part of NUMCL.
 
 * Usage
 
-: ./report.sh [regexp]
+: ./report.sh [test]
+
+=test= specifies the test that needs to be rerun and displayed.
+It is one of:
+
++ 0template
++ 1access
++ 1allocation
++ 2linarg
++ 3arith
++ 4concat
++ 5math
+
 
 * Dependencies
 
