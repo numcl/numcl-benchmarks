@@ -8,42 +8,75 @@ if [ -z $regexp ]
 then
     regexp=".*"
 else
-    ls numcl/logs/*.log | grep "$regexp" | xargs -n 1 rm -v
+    ls numcl/logs*/*.log | grep "$regexp" | xargs -n 1 rm -v
 fi
 
 make -j $(($(grep -c "^processor" /proc/cpuinfo)/2))
 
+export tmpdir=$(mktemp -d)
+trap "rm -rfv $tmpdir" EXIT
+
+memo (){
+    tmp=$tmpdir/$(echo "$*" | md5sum | awk '{print $1}')
+    if [ -f $tmp ]
+    then
+        flock -s $tmp cat $tmp
+    else
+        flock $tmp bash -c "$* | tee $tmp"
+    fi
+}
+
+memofile (){
+    memo $@ > /dev/null
+    echo $tmpdir/$(echo "$*" | md5sum | awk '{print $1}')
+}
+
 titles (){
-    cat numcl/logs/*.log numpy/logs/*.log | awk -f report.awk | cut -f1 | sort | uniq
+    echo title
+    cat numcl/logs*/*.log numpy/logs*/*.log | awk -f report.awk | cut -f1 | sort | uniq
 }
-     
-collect_numcl (){
-    titles | while read title
+
+process-header (){
+    echo $1 | sed 's/logs-\?//g;s_/$__g;s_/_._g'
+}
+
+collect (){
+    process-header $1
+    memo titles | while read title
     do
-        cat numcl/logs/*.log | awk -f report.awk | (grep -m 1 $title || echo "N/A" ) | cut -f2
+        cat $1/*.log | awk -f report.awk | (grep -m 1 $title || echo "N/A" ) | cut -f2
     done
 }
 
-collect_numpy (){
-    titles | while read title
+ratio (){
+    echo "$(process-header $1)/$(process-header $2)"
+    paste <(memo collect $1) <(memo collect $2) | while read first second
     do
-        cat numpy/logs/*.log | awk -f report.awk | (grep -m 1 $title || echo "N/A" ) | cut -f2
+        python -c "print('{:6.4g}'.format($first / $second))" 2>/dev/null || echo "N/A"
     done
 }
 
-collect_ratio (){
-    paste <(collect_numcl) <(collect_numpy) | while read numcl numpy
+export -f memo titles collect ratio process-header
+
+# time memo titles
+# time memo titles
+# time memo titles
+
+columns=
+{
+    columns="$columns $(memofile titles)"
+    columns="$columns $(memofile collect numpy/logs)"
+    for d in numcl/logs*
     do
-        python -c "print('{:6.4g}'.format($numcl / $numpy))" 2>/dev/null || echo "N/A"
+        columns="$columns $(memofile collect $d)"
+        columns="$columns $(memofile ratio $d numpy/logs)"
+        if ! [ -z $d2 ]
+        then
+               columns="$columns $(memofile ratio $d2 $d)"
+        fi
+        d2=$d
     done
-}
+    
+} > /dev/null
 
-
-(
-    echo "title numcl numpy cl/py"
-    paste <(titles) \
-          <(collect_numcl) \
-          <(collect_numpy) \
-          <(collect_ratio) \
-          | grep "$regexp"
-) | column -t | tee $(date +%Y%m%d%H%M).log
+paste $columns | grep "$regexp" | column -t | tee $(date +%Y%m%d%H%M).log
