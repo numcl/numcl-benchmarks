@@ -31,6 +31,7 @@ memofile (){
     echo $tmpdir/$(echo "$*" | md5sum | awk '{print $1}')
 }
 
+# leftmost column
 titles (){
     echo title
     cat numcl/logs*/*.log numpy/logs*/*.log | awk -f report.awk | cut -f1 | sort | uniq
@@ -65,7 +66,7 @@ export -f memo titles collect ratio process-header
 columns=
 {
     columns="$columns $(memofile titles)"
-    for d in numcl/logs* numpy/logs
+    for d in $(ls -d -c numcl/logs*/ ) numpy/logs/ # -c : sort by ctime, -d : directory only
     do
         columns="$columns $(memofile collect $d)"
         if ! [ -z $d2 ]
