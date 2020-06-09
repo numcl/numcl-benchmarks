@@ -1,0 +1,8 @@
+
+name : numcl
+dependencies:
+  - python=3
+  - pip:
+      - pip
+      - numpy
+      - benchmarker

@@ -21,6 +21,7 @@ It is one of:
 * Dependencies
 
 numpy: =pip3 install numpy benchmarker=
+or: =conda env create -f environment.yml=
 
 numcl: =ros install numcl/constantfold numcl/gtype numcl/specialized-function numcl/numcl trivial-benchmark=
 
