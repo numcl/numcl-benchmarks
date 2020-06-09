@@ -1,5 +1,5 @@
 
-version = $(shell ros -s numcl -e "(write-sequence (numcl:numcl-version) *standard-output*)")
+version = $(shell ros dynamic-space-size=8000 -s numcl -e "(write-sequence (numcl:numcl-version) *standard-output*)")
 
 all: $(patsubst %.ros,logs-$(version)/%.log,$(wildcard *.ros))
 
